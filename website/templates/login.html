@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+%}
+<form method="POST">
+  <h3 align="center">--CHATTERBOX TELCO--</h3>
+
+
+  <div class="col-xl-6 col-md-3 mb-12 card-center">
+    <div class="card border-left-info shadow h-100 py-2 text-white bg-dark mb-3">
+      <!-- <img src="website\images\ChatterboxTecloCover.jpg" class="card-img-top" alt="ChatterboxTecloCover"> -->
+      <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/sign-up">Signup</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <label for="email">Email Address</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" />
+          </br>
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" />
+        </div>
+        <br />
+
+        <div class="container">
+          <div class="row">
+            <div class="col text-center">
+              <button type="submit" class="btn button1 btn-primary">Login</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</form>
+{% endblock %}

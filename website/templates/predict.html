@@ -1,0 +1,184 @@
+{% extends "base.html" %} {% block title %}Predict{% endblock %} {% block content
+    %}
+<h1 align="center"></h1>
+
+{%if churn%}
+<!-- <h1 class="text-white">{{churn}}</h1> -->
+{% endif %}
+
+<div class="col-xl-10 col-md-3 mb-12 card-center bg-light rounded card border-warning mb-3">
+    <div class="card-header text-center font-weight-bold text-warning">
+        <h1>CHURN PREDICTOR</h1>
+    </div>
+
+    <div class="form-group row ">
+    </div>
+
+    <form action="/predict" method="POST">
+
+        <div class="form-group row ">
+
+            <div class="col-md-4 mb-3">
+                <label for="account_length" class="col-form-label">Account Length</label>
+                <input type="number" class="form-control" name="account_length" id="account_length"
+                    placeholder="Account Length" value="0">
+            </div>
+
+            <div class="input-group col-md-4 mb-3">
+                <legend class="col-form-label">Choose Location Code</legend>
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Location Code</label>
+                </div>
+                <select class="custom-select" name="location_code" id="location_code">
+                    <option selected value="445">445</option>
+                    <option value="452">452</option>
+                    <option value="547">557</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="customer_service_calls" class="col-form-label">No. of Customer service calls</label>
+                <input type="number" class="form-control" name="customer_service_calls" id="customer_service_calls"
+                    placeholder="No. of Customer Service Calls" value="0">
+            </div>
+
+        </div>
+
+        <div class="form-group row ">
+
+            <div class="input-group col-md-4 mb-3">
+                <legend class="col-form-label">Has An International Plan?</legend>
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">International Plan</label>
+                </div>
+                <select class="custom-select" name="intertiol_plan" id="intertiol_plan">\
+                    <option selected value="0">NO</option>
+                    <option value="1">YES</option>
+                </select>
+            </div>
+
+            <div class="input-group col-md-4 mb-3">
+                <legend class="col-form-label">Has A Voicemail Plan?</legend>
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Voicemail Plan</label>
+                </div>
+                <select class="custom-select" name="voice_mail_plan" id="voice_mail_plan">\
+                    <option selected value="0">NO</option>
+                    <option value="1">YES</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="number_vm_messages" class="col-form-label">No. of Voicemail Messages</label>
+                <input type="number" class="form-control" name="number_vm_messages" id="number_vm_messages"
+                    placeholder="Number of Voicemail Messages" value="0">
+            </div>
+
+        </div>
+
+
+        <div class="form-group row ">
+
+            <div class="col-md-4 mb-3">
+                <label for="total_day_min" class="col-form-label">Total day minutes</label>
+                <input type="number" class="form-control" name="total_day_min" id="total_day_min"
+                    placeholder="Total day minutes" value="0">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="total_day_calls" class="col-form-label">Total day calls</label>
+                <input type="number" class="form-control" name="total_day_calls" id="total_day_calls"
+                    placeholder="Total day calls" value="0">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="total_day_charge" class="col-form-label">Total day charge</label>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" name="total_day_charge" id="total_day_charge"
+                        placeholder="Total day cahrge" value="0">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row ">
+
+            <div class="col-md-4 mb-3">
+                <label for="total_eve_min" class="col-form-label">Total evening minutes</label>
+                <input type="number" class="form-control" name="total_eve_min" id="total_eve_min"
+                    placeholder="Total evening minutes" value="0">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="total_eve_calls" class="col-form-label">Total evening calls</label>
+                <input type="number" class="form-control" name="total_eve_calls" id="total_eve_calls"
+                    placeholder="Total evening calls" value="0">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="total_eve_charge" class="col-form-label">Total evening charge</label>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" name="total_eve_charge" id="total_eve_charge"
+                        placeholder="Total evening cahrge" value="0">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-group row ">
+
+            <div class="col-md-4 mb-3">
+                <label for="total_night_minutes" class="col-form-label">Total night minutes</label>
+                <input type="number" class="form-control" name="total_night_minutes" id="total_night_minutes"
+                    placeholder="Total night minutes" value="0">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="total_night_calls" class="col-form-label">Total night calls</label>
+                <input type="number" class="form-control" name="total_night_calls" id="total_night_calls"
+                    placeholder="Total night calls" value="0">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="total_night_charge" class="col-form-label">Total night charge</label>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" name="total_night_charge" id="total_night_charge"
+                        placeholder="Total night cahrge" value="0">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-group row ">
+
+            <div class="col-md-4 mb-3">
+                <label for="total_intl_minutes" class="col-form-label">Total international minutes</label>
+                <input type="number" class="form-control" name="total_intl_minutes" id="total_intl_minutes"
+                    placeholder="Total international minutes" value="0">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="total_intl_calls" class="col-form-label">Total international calls</label>
+                <input type="number" class="form-control" name="total_intl_calls" id="total_intl_calls"
+                    placeholder="Total international calls" value="0">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="total_intl_charge" class="col-form-label">Total international charge</label>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" name="total_intl_charge" id="total_intl_charge"
+                        placeholder="Total international charge" value="0">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group row ">
+            <div class="col-md-4 mb-10">
+            </div>
+            <div class="col-md-4 mb-10">
+                <button type="submit" class="btn btn-warning btn-lg btn-block">Predict</button>
+            </div>
+            <div class="col-md-4 mb-10">
+            </div>
+        </div>
+
+
+    </form>
+</div>
+{% endblock %}

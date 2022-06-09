@@ -1,0 +1,664 @@
+{% extends "base.html" %} {% block title %}Predict{% endblock %} {% block content
+    %}
+
+    {%if churn%}
+    <!-- <h1>{{churn}}</h1> -->
+    {% endif %}
+    
+    <!-- <h1 class="text-white">{{churn}}</h1> -->
+
+    
+    <div class="col-xl-6 col-md-3 mb-12 card-center"></div>
+
+    {%if is_churn%}
+
+    <div class="card text-white bg-danger mb-3">
+        <div class="card-header text-center"><h1>CHURN</h1></div>
+        <div class="card-body">
+          <h5 class="card-title text-center">Unfortunatley the customer is more likey to churn!</h5>
+          <p class="card-text">We are sorry to inform you that, after analysing the previous data of the customers
+               at the Chatterbox Telco pvt. ltd. this customer's behaviour is more similar to the customers who have 
+               already churned. But remember "IT IS NEVER TOO LATE". You can get some idea about the customer's details
+                below this message. We encourage you to analyse the behaviour of the customer and try to give him/her 
+                some solutions such as offers/promos or introduce him/her to new plans. Wish you all the best on keeping
+                 the customer without churning. Good Luck! ;)</p>
+        </div>
+      </div>
+
+
+
+    <div class="col-xl-10 col-md-3 mb-12 card-center bg-light rounded card border-danger mb-3">
+        <div class="card-header text-center font-danger-bold text-danger">
+            <h3>CUSTOMER DETAILS</h3>
+        </div>
+    
+        <div class="form-group row ">
+        </div>
+    
+        <form action="/predict" method="POST">
+
+            <div class="form-group row ">
+            <div class="input-group col-md-4 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Account Length</label>
+                  </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{account_length}} readonly>
+              </div>
+
+              <div class="input-group col-md-4 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Location Code</label>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{location_code}} readonly>
+              </div>
+
+              <div class="input-group col-md-4 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Customer service calls</label>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{customer_service_calls}} readonly>
+              </div>
+
+            </div>
+    
+            <div class="form-group row ">
+    
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">International Plan</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{intertiol_plan}} readonly>
+                </div>
+    
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Voicemail Plan</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{voice_mail_plan}} readonly>
+                </div>
+
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Voicemail Messages</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_day_charge}} readonly>
+                </div>
+    
+            </div>
+
+            
+    
+    
+            <div class="form-group row ">
+    
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Day Minutes</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_day_min}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Day Calls</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_day_calls}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Day Charge</label>
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_day_charge}} readonly>
+                </div>
+            </div>
+    
+            <div class="form-group row ">
+    
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Evening Minutes</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_eve_min}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Evening Calls</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_eve_calls}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Evening Charge</label>
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_eve_charge}} readonly>
+                </div>
+            </div>
+    
+            <div class="form-group row ">
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Night Minutes</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_night_minutes}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Night Calls</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_night_calls}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Night Charge</label>
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_night_charge}} readonly>
+                </div>
+                
+            </div>
+    
+            <div class="form-group row ">
+    
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">International Minutes</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_intl_minutes}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">International Calls</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_intl_calls}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">International Charge</label>
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_intl_charge}} readonly>
+                </div>
+            </div>
+    
+    
+            <div class="form-group row ">
+                <div class="col-md-4 mb-10">
+                </div>
+                <div class="col-md-4 mb-10">
+                    <p>
+                        <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                          View more details about the customer
+                        </button>
+                      </p>
+                      
+                </div>
+                <div class="col-md-4 mb-10">
+                </div>
+            </div>
+            <div class="form-group row col-md-12 mb-10">
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <div class="form-group row ">
+    
+                        <div class="input-group col-md-4 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Local Minutes</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_local_mins}} readonly>
+                        </div>
+                        <div class="input-group col-md-4 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Local Calls</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_local_calls}} readonly>
+                        </div>
+                        <div class="input-group col-md-4 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Local Charge</label>
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_local_charge}} readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row ">
+    
+                        <div class="input-group col-md-4 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Total Minutes</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_mins}} readonly>
+                        </div>
+                        <div class="input-group col-md-4 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Total Calls</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_calls}} readonly>
+                        </div>
+                        <div class="input-group col-md-4 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Total Charge</label>
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_charge}} readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row ">
+    
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Average Local Calls</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{avg_local_calls}} readonly>
+                        <small class="w-100">Average Local Calls = Total Local Minutes/Total Local Calls</small>
+                        </div>
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Local Charge Per Minute</label>
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{local_charge_per_min}} readonly>
+                        <small class="w-100">Local Charge Per Minute = Total Local Charge/Total Local Minutes</small>
+                        </div>
+                    </div>
+                    <div class="form-group row ">
+    
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Average International Calls</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{avg_intl_calls}} readonly>
+                        <small class="w-100">Average International Calls = Total International Minutes/Total International Calls</small>
+                        </div>
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">International Charge Per Minute</label>
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{intl_charge_per_min}} readonly>
+                        <small class="w-100">International Charge Per Minute = Total International Charge/Total International Minutes</small>
+                        </div>
+                    </div>
+                    <div class="form-group row ">
+    
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Average Total Calls</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{avg_total_calls}} readonly>
+                        <small class="w-100">Average Total Calls = Total Minutes/Total Calls</small>
+                        </div>
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-danger btn-block" for="inputGroupSelect01">Total Charge Per Minute</label>
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_charge_per_min}} readonly>
+                        <small class="w-100">Total Charge Per Minute = Total Charge/Total Minutes</small>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              </div>
+    
+        </form>
+    </div>
+    {%else%}
+    <div class="card text-white bg-warning mb-3">
+        <div class="card-header text-center"><h1>NOT CHURN</h1></div>
+        <div class="card-body">
+          <h5 class="card-title text-center">Luckily the customer is less likey to churn!</h5>
+          <p class="card-text">We are glad to inform you that, after analysing the previous data of the customers
+               at the Chatterbox Telco pvt. ltd. this customer's behaviour is much unlikely to the customers who have 
+               already churned. At the moment, you should not have to worry about this customer too much since the 
+               likelihood of this customer to be churned is very low. But remember "NOTHING IS PERMENANT". If you didn't 
+               pay any attention at all, this customer might churn. So don't losse focus. You can get some idea about 
+               the customer's details below this message. We encourage you to analyse the behaviour of the customer and 
+               try to learn from this customer's behaviour to minimize the churn in the company. This is a very good 
+               learning oppertunity. Wish you all the best on keeping the customer in the same manner without churning. 
+               Good Luck! ;)</p>
+        </div>
+      </div>
+
+
+
+    <div class="col-xl-10 col-md-3 mb-12 card-center bg-light rounded card border-warning mb-3">
+        <div class="card-header text-center font-warning-bold text-warning">
+            <h3>CUSTOMER DETAILS</h3>
+        </div>
+    
+        <div class="form-group row ">
+        </div>
+    
+        <form action="/predict" method="POST">
+
+            <div class="form-group row ">
+            <div class="input-group col-md-4 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Account Length</label>
+                  </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{account_length}} readonly>
+              </div>
+
+              <div class="input-group col-md-4 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Location Code</label>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{location_code}} readonly>
+              </div>
+
+              <div class="input-group col-md-4 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Customer service calls</label>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{customer_service_calls}} readonly>
+              </div>
+
+            </div>
+    
+            <div class="form-group row ">
+    
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">International Plan</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{intertiol_plan}} readonly>
+                </div>
+    
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Voicemail Plan</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{voice_mail_plan}} readonly>
+                </div>
+
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Voicemail Messages</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_day_charge}} readonly>
+                </div>
+    
+            </div>
+
+            
+    
+    
+            <div class="form-group row ">
+    
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Day Minutes</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_day_min}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Day Calls</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_day_calls}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Day Charge</label>
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_day_charge}} readonly>
+                </div>
+            </div>
+    
+            <div class="form-group row ">
+    
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Evening Minutes</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_eve_min}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Evening Calls</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_eve_calls}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Evening Charge</label>
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_eve_charge}} readonly>
+                </div>
+            </div>
+    
+            <div class="form-group row ">
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Night Minutes</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_night_minutes}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Night Calls</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_night_calls}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Night Charge</label>
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_night_charge}} readonly>
+                </div>
+                
+            </div>
+    
+            <div class="form-group row ">
+    
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">International Minutes</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_intl_minutes}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">International Calls</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_intl_calls}} readonly>
+                </div>
+                <div class="input-group col-md-4 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">International Charge</label>
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                aria-describedby="basic-addon1" value = {{total_intl_charge}} readonly>
+                </div>
+            </div>
+    
+    
+            <div class="form-group row ">
+                <div class="col-md-4 mb-10">
+                </div>
+                <div class="col-md-4 mb-10">
+                    <p>
+                        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                          View more details about the customer
+                        </button>
+                      </p>
+                      
+                </div>
+                <div class="col-md-4 mb-10">
+                </div>
+            </div>
+            <div class="form-group row col-md-12 mb-10">
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <div class="form-group row ">
+    
+                        <div class="input-group col-md-4 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Local Minutes</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_local_mins}} readonly>
+                        </div>
+                        <div class="input-group col-md-4 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Local Calls</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_local_calls}} readonly>
+                        </div>
+                        <div class="input-group col-md-4 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Local Charge</label>
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_local_charge}} readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row ">
+    
+                        <div class="input-group col-md-4 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Total Minutes</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_mins}} readonly>
+                        </div>
+                        <div class="input-group col-md-4 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Total Calls</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_calls}} readonly>
+                        </div>
+                        <div class="input-group col-md-4 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Total Charge</label>
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_charge}} readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row ">
+    
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Average Local Calls</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{avg_local_calls}} readonly>
+                        <small class="w-100">Average Local Calls = Total Local Minutes/Total Local Calls</small>
+                        </div>
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Local Charge Per Minute</label>
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{local_charge_per_min}} readonly>
+                        <small class="w-100">Local Charge Per Minute = Total Local Charge/Total Local Minutes</small>
+                        </div>
+                    </div>
+                    <div class="form-group row ">
+    
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Average International Calls</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{avg_intl_calls}} readonly>
+                        <small class="w-100">Average International Calls = Total International Minutes/Total International Calls</small>
+                        </div>
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">International Charge Per Minute</label>
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{intl_charge_per_min}} readonly>
+                        <small class="w-100">International Charge Per Minute = Total International Charge/Total International Minutes</small>
+                        </div>
+                    </div>
+                    <div class="form-group row ">
+    
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Average Total Calls</label>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{avg_total_calls}} readonly>
+                        <small class="w-100">Average Total Calls = Total Minutes/Total Calls</small>
+                        </div>
+                        <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text btn btn-warning btn-block" for="inputGroupSelect01">Total Charge Per Minute</label>
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" 
+                        aria-describedby="basic-addon1" value = {{total_charge_per_min}} readonly>
+                        <small class="w-100">Total Charge Per Minute = Total Charge/Total Minutes</small>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              </div>
+    
+        </form>
+    </div>
+    {% endif %}
+
+    {% endblock %}
+    
